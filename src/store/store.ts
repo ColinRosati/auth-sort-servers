@@ -1,17 +1,23 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-// import counterReducer from '../features/counter/counterSlice';
+import { applyMiddleware, combineReducers, createStore } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
+import thunk from "redux-thunk";
 
-export const store = configureStore({
-  reducer: {
-    // counter: counterReducer,
-  },
-});
+import { serversReducer } from 'store/servers/reducer';
+import { tokensReducer } from 'store/tokens/reducer';
 
-export type AppDispatch = typeof store.dispatch;
-export type RootState = ReturnType<typeof store.getState>;
-export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  RootState,
-  unknown,
-  Action<string>
->;
+import { RootState, RootAction } from './types';
+
+const configureStore = () => {
+  const rootReducer = combineReducers<RootState, RootAction>({
+    servers: serversReducer,
+    tokens: tokensReducer
+  });
+  const store = createStore(
+    rootReducer,
+    undefined,
+    composeWithDevTools(applyMiddleware(thunk))
+  );
+  return store;
+};
+
+export const store = configureStore();

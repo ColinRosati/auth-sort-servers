@@ -1,0 +1,1 @@
+export const apiPostTokens = 'http://playground.tesonet.lt/v1/tokens';
