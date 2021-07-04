@@ -3,8 +3,9 @@ import { Action } from "@reduxjs/toolkit";
 import { postTokensFailed, postTokensRequest, postTokensSuccess } from "./actions";
 
 export type InitialState = {
-  tokens: any;
-};
+  token: null | any;
+  hasToken: boolean;
+} | undefined;
 
 interface PostTokensRequestAction
   extends Action<typeof postTokensRequest> {

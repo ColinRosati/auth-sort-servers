@@ -1,5 +1,5 @@
 import { ReactChild, ReactChildren } from "react";
 
 export type FullpageLayoutProps = {
-  children: ReactChild | ReactChildren;
+  children: ReactChild | ReactChild[] | ReactChildren | ReactChildren[]; 
 }

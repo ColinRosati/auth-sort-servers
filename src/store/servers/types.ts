@@ -7,7 +7,7 @@ export type Servers = any[]
 export type InitialState = {
   data: Servers;
   hasErrors: false | string;
-};
+}| undefined;;
 
 interface GetServersRequestAction
   extends Action<typeof getServersRequest> {
