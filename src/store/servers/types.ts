@@ -2,7 +2,12 @@ import { Action } from "@reduxjs/toolkit";
 
 import { getServersFailed, getServersRequest, getServersSuccess } from "./actions";
 
-export type Servers = any[]
+export type Server = {
+  name: string;
+  distance: number;
+}
+
+export type Servers = Server[]
 
 export type InitialState = {
   data: Servers;
