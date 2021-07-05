@@ -25,7 +25,9 @@ I would add some UI alerts based on errors in store.
 ## Steps to run repo
 
 `git pull https://github.com/ColinRosati/auth-sort-servers.git`
+
 `yarn`
+
 `yarn start`
 
 ## Available Scripts
