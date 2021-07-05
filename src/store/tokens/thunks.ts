@@ -10,7 +10,7 @@ TokensAction
 > => dispatch => {
     dispatch({ type: postTokensRequest, payload: null });
 
-    // TODO fix preflight req error
+    // TODO fix preflight CORS redirect error
     // const requestOptions = {
     //   method: 'POST',
     //   headers: { 'Content-Type': 'application/json' },
