@@ -1,10 +1,11 @@
 import { ActionThunk } from "store/types";
 import TOKENS_SUCCESS from "constants/tokens_success.json"
 
-import {  postTokensRequest, postTokensRequestRemove, postTokensSuccess } from "./actions";
+import {  postTokensFailed, postTokensRequest, postTokensRequestRemove, postTokensSuccess } from "./actions";
 import { TokensAction } from "./types";
+import { FeildsState } from "components/Authorization/types";
 
-export const postTokens = (payload = {username: "tesonet", password: "partyanimal"}): ActionThunk<
+export const postTokens = (payload: FeildsState): ActionThunk<
 TokensAction
 > => dispatch => {
     dispatch({ type: postTokensRequest, payload: null });
@@ -31,10 +32,17 @@ TokensAction
     //     });
     //   });
 
+    if(payload.email === 'tesonet' && payload.password === 'partyanimal'){
       dispatch({
         type: postTokensSuccess,
         payload: TOKENS_SUCCESS
       });
+    } else {
+      dispatch({
+        type: postTokensFailed,
+        payload: null
+      });
+    }
   };
 
 export const deleteTokens = (): ActionThunk<

@@ -16,11 +16,10 @@
 .listItem {
   display: flex;
   justify-content: space-between;
-
+  padding: 0 2rem;
   & > h4 {
     margin: 2.5rem;
   }
-
   li {
     list-style-type: none;
   }
@@ -31,4 +30,11 @@ li:nth-child(odd) {
 }
 li:nth-child(even) {
   background: #80808030;
+}
+
+.emptyList {
+  background: #80808030;
+  margin: 2rem 0;
+  padding: 5rem;
+  text-align: center;
 }

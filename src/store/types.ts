@@ -5,7 +5,6 @@ import { TokensState, TokensAction } from "./tokens/types";
 import { store } from "./store";
 
 export type AppDispatch = typeof store.dispatch;
-
 export interface RootState {
   servers: ServerState;
   tokens: TokensState;

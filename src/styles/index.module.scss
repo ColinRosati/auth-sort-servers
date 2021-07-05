@@ -1,0 +1,9 @@
+@mixin boxPrimary {
+  border-radius: 5px;
+  background-color: rgb(51, 51, 51);
+  color: rgb(146, 146, 236);
+  &:hover {
+    background-color: rgb(146, 146, 236);
+    color: rgb(51, 51, 51);
+  }
+}
