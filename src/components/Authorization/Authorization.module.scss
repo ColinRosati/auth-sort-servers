@@ -8,7 +8,7 @@
 .formWrapper {
   display: flex;
   flex-direction: column;
-  width: 21rem;
+  width: 13rem;
 
   input {
     margin: 0.5rem 0;
@@ -16,11 +16,20 @@
     border-radius: 5px;
   }
   & > label > input {
-    width: 20rem;
+    width: 12rem;
   }
 
   .submitButton {
     @include boxPrimary;
-    width: 21.3rem;
+    width: 13rem;
+  }
+  @media only screen and (min-width: 992px) {
+    width: 21rem;
+    & > label > input {
+      width: 20rem;
+    }
+    .submitButton {
+      width: 21.3rem;
+    }
   }
 }
