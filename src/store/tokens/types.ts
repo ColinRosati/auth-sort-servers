@@ -4,6 +4,10 @@ import { postTokensFailed, postTokensRequest, postTokensSuccess } from "./action
 
 export type InitialState = {
   token: null | any;
+  errors: null | {
+    errorMessage: null | string;
+    hasErrors: boolean;
+  };
   hasToken: boolean;
 } | undefined;
 

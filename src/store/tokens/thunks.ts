@@ -40,7 +40,7 @@ TokensAction
     } else {
       dispatch({
         type: postTokensFailed,
-        payload: null
+        payload: 'Sign-in issue try again'
       });
     }
   };

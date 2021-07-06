@@ -8,7 +8,7 @@ export const getServers = (payload: string): ActionThunk<
 ServerAction> => dispatch => {
   dispatch({ type: getServersRequest, payload: null });
 
-   // TODO preflight error
+   // TODO fix preflight CORS redirect error
     // axios.get(apiGetServers, {
     //   headers: {
     //     authorization: payload 

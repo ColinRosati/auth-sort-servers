@@ -4,16 +4,19 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 This app has a basic authorization & list seach/sort capabilities using React, Redux, Thunks & Typescript
 
-### requirements
+## Goal
 
-Create a server explorer web app:
+Create a server explorer web app with sign-in authorization:
 ○ Implement login (POST http://playground.tesonet.lt/v1/tokens { username: "tesonet", password: "partyanimal" })
+
 ○ Display servers list - GET http://playground.tesonet.lt/v1/servers ○ Make servers list sortable and searchable by name/distance
+
 ● App must work on all modern browsers + IE11
 
 ## If I had more time
 
-If I had more time to work on this I would fix the API request CORS errors. I tried a few fetching librarie (Axios), different middleware setups, app proxy redirects with no results.
+If I had more time to work on this I would fix the API request CORS errors. I tried a few fetching libraries (Axios), different middleware setups, app proxy redirects with no results. The API was working in Postman with "Automatically follow redirects", &
+"Follow original HTTP Method" set.
 
 I could have added some basic UI validation tests as well. This would test the util functions
 by intereacting with the DOM and validating results.
