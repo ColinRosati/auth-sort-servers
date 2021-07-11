@@ -1,5 +1,5 @@
-import { Servers } from "store/servers/types";
+import { Servers } from 'store/servers/types';
 
 export type ServerListProps = {
-  servers?: Servers
-}
+  servers: Servers | null;
+};

@@ -1,30 +1,32 @@
-import { Reducer } from "react";
-import { getServersSuccess, getServersFailed } from "./actions";
-import { ServerState, ServerAction, InitialState } from "./types";
+import { Reducer } from 'react';
+import { getServersSuccess, getServersFailed } from './actions';
+import { ServerState, ServerAction, InitialState } from './types';
 
 const initialState: InitialState = {
   data: [],
-  hasErrors: false,
-}
+  hasError: false,
+};
 
-export const serversReducer: Reducer<ServerState, ServerAction> = (
+const serversReducer: Reducer<ServerState, ServerAction> = (
   state = initialState,
-  {type, payload}
+  { type, payload },
 ) => {
   switch (type) {
     case getServersSuccess:
       return {
         ...state,
-        data: payload
+        data: payload,
       };
     case getServersFailed:
       return {
         ...state,
-        hasErrors: payload
+        hasError: payload,
       };
     default:
       return {
-        ...state
-      }
+        ...state,
+      };
   }
 };
+
+export default serversReducer;

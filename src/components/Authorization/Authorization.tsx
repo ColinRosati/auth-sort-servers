@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux';
 import FullpageLayout from 'components/layout/FullpageLayout/FullpageLayout';
 import { postTokens } from 'store/tokens/thunks';
 
-import styles from './Authorization.module.scss'
-import { FeildsState } from './types';
+import styles from './Authorization.module.scss';
+import { FeildsState, InputElementValue } from './types';
 
 const Authorization = (): ReactElement => {
   const dispatch = useDispatch();
@@ -14,39 +14,44 @@ const Authorization = (): ReactElement => {
     password: 'partyanimal',
   });
 
-  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
-    const name = (event.target as any).name;
-    const value = (event.target as any).value;
-
+  const handleChange = ({ name, value }: InputElementValue) => {
     setFeilds({
       ...feilds,
-      [name]: value
-    })
-  }
+      [name]: value,
+    });
+  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
     dispatch(postTokens(feilds));
-    event.stopPropagation();
-  }
+    event.preventDefault();
+  };
 
-return (
-  <FullpageLayout>
+  return (
+    <FullpageLayout>
       <section className={styles.authWrapper}>
         <h2>Authorization</h2>
         <form className={styles.formWrapper} onSubmit={handleSubmit}>
-          <label> 
+          <label>
             Email
-            <input name="email" value={feilds.email} onChange={handleChange}/>
+            <input
+              name='email'
+              value={feilds.email}
+              onChange={({ target }) => handleChange(target)}
+            />
           </label>
           <label>
             Password
-            <input name="password" value={feilds.password} onChange={handleChange}/>
+            <input
+              name='password'
+              value={feilds.password}
+              onChange={({ target }) => handleChange(target)}
+            />
           </label>
-          <input className={styles.submitButton} type="submit" value="Submit"/>
+          <input className={styles.submitButton} type='submit' value='Submit' />
         </form>
       </section>
     </FullpageLayout>
-)};
+  );
+};
 
 export default Authorization;

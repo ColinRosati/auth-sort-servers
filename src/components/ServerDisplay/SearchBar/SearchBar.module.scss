@@ -1,3 +1,5 @@
+@import 'styles/variables.scss';
+
 .searchBarWrapper {
   display: flex;
   justify-content: center;
@@ -8,12 +10,12 @@
   height: 2rem;
   padding: 0 0.5rem;
   margin: 0 0.5rem;
-  border-radius: 5px;
+  border-radius: $borderRad;
 }
 
 .proximitySelect {
   width: 7rem;
   padding: 0 0.5rem;
-  border-radius: 5px;
-  border: 2px solid #6e6e6e;
+  border-radius: $borderRad;
+  border: 2px solid $greyMedium;
 }

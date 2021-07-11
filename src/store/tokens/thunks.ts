@@ -1,52 +1,36 @@
-import { ActionThunk } from "store/types";
-import TOKENS_SUCCESS from "constants/tokens_success.json"
+import axios from 'axios';
+import { ActionThunk } from 'store/types';
+import { FeildsState } from 'components/Authorization/types';
 
-import {  postTokensFailed, postTokensRequest, postTokensRequestRemove, postTokensSuccess } from "./actions";
-import { TokensAction } from "./types";
-import { FeildsState } from "components/Authorization/types";
+import {
+  postTokensFailed,
+  postTokensRequest,
+  postTokensRequestRemove,
+  postTokensSuccess,
+} from './actions';
+import { TokensAction } from './types';
+import { apiPostTokens } from './api';
 
-export const postTokens = (payload: FeildsState): ActionThunk<
-TokensAction
-> => dispatch => {
-    dispatch({ type: postTokensRequest, payload: null });
+export const postTokens = (payload: FeildsState): ActionThunk<TokensAction> => (dispatch) => {
+  dispatch({ type: postTokensRequest, payload: null });
 
-    // TODO fix preflight CORS redirect error
-    // const requestOptions = {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(payload)
-    // };
-    
-    // fetch(apiPostTokens, requestOptions)
-    //   .then(response => response.json())
-    //   .then((body) => {
-    //     dispatch({
-    //       type: postTokensSuccess,
-    //       payload: body
-    //     });
-    //   })
-    //   .catch(e => {
-    //     dispatch({
-    //       type: postTokensFailed,
-    //       payload: e
-    //     });
-    //   });
-
-    if(payload.email === 'tesonet' && payload.password === 'partyanimal'){
+  axios.post(apiPostTokens(payload))
+    .then(({ data: { token } }): string => token)
+    .then((body: string): void => {
       dispatch({
         type: postTokensSuccess,
-        payload: TOKENS_SUCCESS
+        payload: body,
       });
-    } else {
+    })
+    .catch(() => {
       dispatch({
         type: postTokensFailed,
-        payload: 'Sign-in issue try again'
+        payload: true,
       });
-    }
-  };
+    });
+};
 
-export const deleteTokens = (): ActionThunk<
-TokensAction> => dispatch => {
+export const deleteTokens = (): ActionThunk<TokensAction> => (dispatch) => {
   dispatch({
     type: postTokensRequestRemove,
     payload: false,

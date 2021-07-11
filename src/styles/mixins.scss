@@ -1,0 +1,9 @@
+@mixin boxPrimary {
+  border-radius: $borderRad;
+  background-color: $greyDark;
+  color: $lavender;
+  &:hover {
+    background-color: $lavender;
+    color: $greyDark;
+  }
+}

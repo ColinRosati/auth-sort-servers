@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import Routing from 'components/Routing/Routing';
 
-const App = () => <Routing />;
+const App = (): ReactElement => <Routing />;
 
 export default App;

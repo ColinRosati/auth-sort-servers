@@ -1,25 +1,28 @@
-import { Reducer } from "react";
-import { InitialState } from "./types";
-import { postTokensSuccess, postTokensFailed, postTokensRequestRemove } from "./actions";
-import { TokensState, TokensAction } from "./types";
+import { Reducer } from 'react';
+import {
+  postTokensSuccess,
+  postTokensFailed,
+  postTokensRequestRemove,
+} from './actions';
+import { InitialState, TokensState, TokensAction } from './types';
 
 const initialState: InitialState = {
   token: null,
   errors: null,
   hasToken: false,
-}
+};
 
 export const tokensReducer: Reducer<TokensState, TokensAction> = (
   state = initialState,
-  {type, payload}
+  { type, payload },
 ) => {
   switch (type) {
     case postTokensSuccess:
       return {
         ...state,
-        token: payload.tokens,
+        token: payload,
         errors: null,
-        hasToken: true
+        hasToken: true,
       };
     case postTokensRequestRemove:
       return {
@@ -34,13 +37,13 @@ export const tokensReducer: Reducer<TokensState, TokensAction> = (
         token: false,
         errors: {
           hasErrors: true,
-          errorMessage: payload
+          errorMessage: payload,
         },
         hasToken: false,
       };
     default:
       return {
-        ...state
-      }
+        ...state,
+      };
   }
 };

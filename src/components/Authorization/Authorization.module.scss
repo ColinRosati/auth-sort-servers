@@ -1,4 +1,5 @@
-@import 'styles/index.module.scss';
+@import 'styles/variables.scss';
+@import 'styles/mixins.scss';
 
 .authWrapper {
   width: fit-content;
@@ -13,7 +14,7 @@
   input {
     margin: 0.5rem 0;
     padding: 0.5rem;
-    border-radius: 5px;
+    border-radius: $borderRad;
   }
   & > label > input {
     width: 12rem;
