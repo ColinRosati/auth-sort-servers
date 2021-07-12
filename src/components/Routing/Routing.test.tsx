@@ -11,7 +11,7 @@ import TOKENS_SUCCESS from 'constants/tokens_success.json';
 import Routing from './Routing';
 
 describe('Routing', () => {
-  it('will redirect a non-logged user to '/login'', () => {
+  it('will redirect a non-logged user to "/login"', () => {
     const history = createMemoryHistory();
     history.push('/some/bad/route');
     render(
@@ -19,13 +19,13 @@ describe('Routing', () => {
         <Router history={history}>
           <Routing />
         </Router>
-      </Provider>
+      </Provider>,
     );
 
     expect(window.location.pathname).toBe('/login');
   });
 
-  it('will redirect a logged user away from '/login' to '/'', () => {
+  it('will redirect a logged user away from "/login" to "/"', () => {
     const history = createMemoryHistory();
     store.dispatch({
       type: postTokensSuccess,
@@ -38,7 +38,7 @@ describe('Routing', () => {
         <Router history={history}>
           <Routing />
         </Router>
-      </Provider>
+      </Provider>,
     );
 
     expect(window.location.pathname).toBe('/');

@@ -26,13 +26,9 @@ module.exports = {
     },
   },
   rules: {
-    '@typescript-eslint/no-unsafe-return': 'off',
-    '@typescript-eslint/no-unsafe-member-access': 'off',
-    '@typescript-eslint/no-unsafe-call': 'off',
     'import/prefer-default-export': 'off',
     'import/no-cycle': 'off',
     'react/prop-types': 'off',
-    'import/no-named-as-default': 'off',
     'implicit-arrow-linebreak': 'off',
     indent: ['off',2,],
     quotes: [2, 'single'],

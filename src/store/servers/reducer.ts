@@ -1,32 +1,25 @@
-import { Reducer } from 'react';
+import { Action, handleActions } from 'redux-actions';
 import { getServersSuccess, getServersFailed } from './actions';
-import { ServerState, ServerAction, InitialState } from './types';
+import {
+  ServerState,
+  InitialState,
+  GetServersSuccessPayload,
+} from './types';
 
 const initialState: InitialState = {
   data: [],
   hasError: false,
 };
 
-const serversReducer: Reducer<ServerState, ServerAction> = (
-  state = initialState,
-  { type, payload },
-) => {
-  switch (type) {
-    case getServersSuccess:
-      return {
-        ...state,
-        data: payload,
-      };
-    case getServersFailed:
-      return {
-        ...state,
-        hasError: payload,
-      };
-    default:
-      return {
-        ...state,
-      };
-  }
-};
+const serversReducer = handleActions<ServerState, GetServersSuccessPayload>({
+  [getServersSuccess]: (state, { payload }: Action<GetServersSuccessPayload>): ServerState => ({
+    ...state,
+    data: payload,
+  }),
+  [getServersFailed]: (state): ServerState => ({
+    ...state,
+    hasError: true,
+  }),
+}, initialState);
 
 export default serversReducer;

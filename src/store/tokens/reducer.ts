@@ -1,49 +1,38 @@
-import { Reducer } from 'react';
+import { Action, handleActions } from 'redux-actions';
 import {
   postTokensSuccess,
   postTokensFailed,
   postTokensRequestRemove,
 } from './actions';
-import { InitialState, TokensState, TokensAction } from './types';
+import { InitialState, TokensState, PostTokensSuccessPayload } from './types';
 
 const initialState: InitialState = {
   token: null,
-  errors: null,
+  hasError: false,
   hasToken: false,
 };
 
-export const tokensReducer: Reducer<TokensState, TokensAction> = (
-  state = initialState,
-  { type, payload },
-) => {
-  switch (type) {
-    case postTokensSuccess:
-      return {
-        ...state,
-        token: payload,
-        errors: null,
-        hasToken: true,
-      };
-    case postTokensRequestRemove:
-      return {
-        ...state,
-        token: false,
-        errors: null,
-        hasToken: false,
-      };
-    case postTokensFailed:
-      return {
-        ...state,
-        token: false,
-        errors: {
-          hasErrors: true,
-          errorMessage: payload,
-        },
-        hasToken: false,
-      };
-    default:
-      return {
-        ...state,
-      };
-  }
-};
+const tokensReducer = handleActions<TokensState, PostTokensSuccessPayload>({
+  [postTokensSuccess]: (state, { payload }: Action<PostTokensSuccessPayload>): TokensState => ({
+    ...state,
+    token: payload,
+    hasError: false,
+    hasToken: true,
+  }),
+  [postTokensRequestRemove]: (state)
+  : TokensState => ({
+    ...state,
+    token: null,
+    hasError: false,
+    hasToken: false,
+  }),
+  [postTokensFailed]: (state)
+  : TokensState => ({
+    ...state,
+    token: null,
+    hasError: true,
+    hasToken: false,
+  }),
+}, initialState);
+
+export default tokensReducer;

@@ -3,12 +3,12 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 
 import serversReducer from 'store/servers/reducer';
-import { tokensReducer } from 'store/tokens/reducer';
+import tokensReducer from 'store/tokens/reducer';
 
-import { RootState, RootAction } from './types';
+import { RootState } from './types';
 
 const configureStore = () => {
-  const rootReducer = combineReducers<RootState, RootAction>({
+  const rootReducer = combineReducers<RootState>({
     servers: serversReducer,
     tokens: tokensReducer,
   });

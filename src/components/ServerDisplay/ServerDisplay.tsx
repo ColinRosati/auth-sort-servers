@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import FullpageLayout from 'components/layout/FullpageLayout/FullpageLayout';
 import { useAppSelector } from 'store/hooks';
 import { Servers } from 'store/servers/types';
+import { DESCENDING_PROXIMITY } from 'constants/proximity';
 import getServers from 'store/servers/thunks';
 
 import ServerList from './ServerList/ServerList';
@@ -15,27 +16,27 @@ const ServerDisplay = (): ReactElement => {
   const dispatch = useDispatch();
   const token = useAppSelector((state) => state.tokens?.token);
   const servers: Servers | null = useAppSelector(
-    (state) => state.servers?.data,
+    (state) => state.servers?.data as Servers,
   );
+
   const [sortedServers, setSortedServer] = useState<Servers | null>(servers);
-  const [proximity, setProximity] = useState<string>('');
-
-  const sortServers = (serversToSort: Servers | null, _proximity: string) =>
-    setSortedServer(proximitySort(_proximity, serversToSort));
-
-  useEffect(() => {
-    sortServers(sortedServers, proximity);
-  }, [proximity]);
-
-  useEffect(() => {
-    if (servers) {
-      setSortedServer(servers);
-    }
-  }, [servers]);
+  const [proximity, setProximity] = useState<string>(DESCENDING_PROXIMITY);
 
   useEffect(() => {
     dispatch(getServers(token as string));
   }, []);
+
+  useEffect(() => {
+    if (!sortedServers?.length) {
+      setSortedServer(servers);
+    } else {
+      setSortedServer(proximitySort(sortedServers, proximity));
+    }
+  }, [servers, proximity]);
+
+  // useEffect(() => {
+  //  setSortedServer(proximitySort(sortedServers, proximity));
+  // }, [proximity]);
 
   return (
     <FullpageLayout>

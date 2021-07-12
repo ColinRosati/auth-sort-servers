@@ -1,12 +1,13 @@
 import axios from 'axios';
-import { ActionThunk } from 'store/types';
+import { AnyAction } from 'redux';
 
+import { ActionThunk } from 'store/types';
 import { getServersRequest, getServersSuccess, getServersFailed } from './actions';
 import { apiGetServers } from './api';
-import { ServerAction, Servers } from './types';
+import { Servers } from './types';
 
-const getServers = (payload: string): ActionThunk<ServerAction> => (dispatch) => {
-  dispatch({ type: getServersRequest, payload });
+const getServers = (payload: string): ActionThunk<AnyAction> => (dispatch) => {
+  dispatch({ type: getServersRequest, payload: null });
 
   axios.get(apiGetServers,
     {
@@ -14,8 +15,8 @@ const getServers = (payload: string): ActionThunk<ServerAction> => (dispatch) =>
         authorization: payload,
       },
     })
-    .then(({ data }): Servers => data)
-    .then((body: Servers): void => {
+    .then(({ data }: { data: Servers }) => data)
+    .then((body): void => {
       dispatch({
         type: getServersSuccess,
         payload: body,

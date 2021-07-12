@@ -1,6 +1,7 @@
+import { DESCENDING_PROXIMITY } from 'constants/proximity';
 import { Servers } from 'store/servers/types';
 
-export const sort = (input: string, results: Servers | null): Servers => {
+export const filterByInput = (input: string, results: Servers | null): Servers => {
   if (!input || input === '' || !results?.length) {
     return [];
   }
@@ -31,14 +32,14 @@ export const sort = (input: string, results: Servers | null): Servers => {
 };
 
 export const proximitySort = (
-  proximity: string,
   serversToSort: Servers | null,
+  proximity = DESCENDING_PROXIMITY,
 ): Servers => {
   if (!serversToSort?.length) {
     return [];
   }
 
-  return proximity === 'descending'
+  return proximity === DESCENDING_PROXIMITY
     ? serversToSort.sort((a, b) => (a.distance > b.distance ? -1 : 1))
-    : serversToSort.sort((a, b) => (a.distance > b.distance ? 1 : -1));
+    : serversToSort.sort((a, b) => (a.distance < b.distance ? -1 : 1));
 };

@@ -1,12 +1,16 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 
-import { sort } from 'components/ServerDisplay/sortUtilities';
+import { ASCENDING_PROXIMITY, DESCENDING_PROXIMITY } from 'constants/proximity';
+import {
+  proximitySort,
+  filterByInput,
+} from 'components/ServerDisplay/sortUtilities';
 import { InputElementValue } from 'components/Authorization/types';
 
 import { SearchBarProps } from './types';
 import styles from './SearchBar.module.scss';
 
-export const SearchBar: FC<SearchBarProps> = ({
+const SearchBar: FC<SearchBarProps> = ({
   setSortedServer,
   sortedServers,
   servers,
@@ -15,9 +19,6 @@ export const SearchBar: FC<SearchBarProps> = ({
 }) => {
   const handleChangeSelect = (event: React.FormEvent<HTMLSelectElement>) => {
     const { value } = event.target as InputElementValue;
-    if (proximity === value) {
-      setProximity('');
-    }
 
     setProximity(value);
     event.preventDefault();
@@ -31,24 +32,18 @@ export const SearchBar: FC<SearchBarProps> = ({
       return;
     }
 
-    const sorted = sort(value, sortedServers);
-    setSortedServer(sorted);
+    const filteredMatch = filterByInput(value, sortedServers);
+    setSortedServer(proximitySort(filteredMatch, proximity));
+
     event.preventDefault();
   };
-
-  useEffect(() => {
-    if (!sortedServers?.length) {
-      setSortedServer(servers);
-    }
-    setProximity('ascending');
-  }, []);
 
   return (
     <section className={styles.searchBarWrapper}>
       <input className={styles.input} onChange={handleChangeInput} />
       <select className={styles.proximitySelect} onChange={handleChangeSelect}>
-        <option value='descending'>Closest</option>
-        <option value='ascending'>Furthest</option>
+        <option value={DESCENDING_PROXIMITY}>Closest</option>
+        <option value={ASCENDING_PROXIMITY}>Furthest</option>
       </select>
     </section>
   );

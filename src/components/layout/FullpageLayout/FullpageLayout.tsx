@@ -11,11 +11,9 @@ const errorMessageConfig = {
 };
 
 const FullpageLayout: FC = ({ children }) => {
-  const errorToken = useAppSelector(
-    (state) => state?.tokens?.errors?.hasErrors,
-  );
+  const errorToken = useAppSelector((state) => state?.tokens?.hasError);
   const errorServer = useAppSelector(
-    (state): boolean => state.servers.hasError,
+    (state): boolean | undefined => state?.servers?.hasError,
   );
 
   const shouldDisplayError = errorToken || errorServer;
