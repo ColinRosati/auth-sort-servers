@@ -5,6 +5,7 @@ This app has a basic authorization & list seach/sort capabilities using React, R
 ## Goal
 
 Create a server explorer web app with sign-in authorization:
+
 ○ Implement login (POST http://playground.tesonet.lt/v1/tokens { username: "tesonet", password: "partyanimal" })
 
 ○ Display servers list - GET http://playground.tesonet.lt/v1/servers ○ Make servers list sortable and searchable by name/distance
@@ -46,3 +47,8 @@ To run tests
 ### `yarn build`
 
 To make build
+
+### Screengrab
+<img width="937" alt="Screen Shot 2021-07-06 at 7 01 04 PM" src="https://user-images.githubusercontent.com/16339467/124639571-9ca85f80-de8c-11eb-969e-57d641576c1f.png">
+<img width="938" alt="Screen Shot 2021-07-06 at 7 01 21 PM" src="https://user-images.githubusercontent.com/16339467/124639574-9dd98c80-de8c-11eb-9eaf-eaf0d2d6c686.png">
+
