@@ -16,7 +16,7 @@ const ServerDisplay = (): ReactElement => {
   const dispatch = useDispatch();
   const token = useAppSelector((state) => state.tokens?.token);
   const servers: Servers | null = useAppSelector(
-    (state) => state.servers?.data as Servers,
+    (state) => state.servers?.data,
   );
 
   const [sortedServers, setSortedServer] = useState<Servers | null>(servers);
@@ -33,10 +33,6 @@ const ServerDisplay = (): ReactElement => {
       setSortedServer(proximitySort(sortedServers, proximity));
     }
   }, [servers, proximity]);
-
-  // useEffect(() => {
-  //  setSortedServer(proximitySort(sortedServers, proximity));
-  // }, [proximity]);
 
   return (
     <FullpageLayout>
